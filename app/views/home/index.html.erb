@@ -1,0 +1,29 @@
+<div class="row">
+	
+	<!-- left side : conversations -->
+	<div class="col-md-9">
+		<ul>
+			<% @conversations.each do |conversation| %>
+				<%= render 'conversations/conversation', conversation: conversation, user: current_user %>
+			<% end %>
+		</ul>
+	</div>
+
+	<!-- right side : users list -->
+	<div class="col-md-3">
+		<div class="card bg-light mb-3" style="max-width: 18rem;">
+		  <div class="card-header">User List</div>
+		  <div class="card-body">
+		  	<% @users.each do |user| %>
+		    	<p class="card-text"><%= user.email %></p>
+		    <% end %>
+		  </div>
+		</div>
+	</div>
+
+
+
+
+
+</div>
+
