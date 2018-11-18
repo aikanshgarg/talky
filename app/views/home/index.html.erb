@@ -2,7 +2,7 @@
 	
 	<!-- left side : conversations -->
 	<div class="col-md-9">
-		<ul>
+		<ul id="#conversations-list">
 			<% @conversations.each do |conversation| %>
 				<%= render 'conversations/conversation', conversation: conversation, user: current_user %>
 			<% end %>
@@ -15,7 +15,9 @@
 		  <div class="card-header">User List</div>
 		  <div class="card-body">
 		  	<% @users.each do |user| %>
-		    	<p class="card-text"><%= user.email %></p>
+		    	<p class="card-text">
+		    		<%= link_to user.email, conversations_path(user_id: user), remote: true, method: :post %>	
+		    	</p>
 		    <% end %>
 		  </div>
 		</div>

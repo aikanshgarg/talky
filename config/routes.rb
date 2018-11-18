@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
+  resources :conversations, only: [:create] do
+  	resources :messages, only: [:create]
+  end
+
 
 
 end

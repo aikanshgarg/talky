@@ -1,17 +1,28 @@
-<div id="accordion">
-  <div class="card">
-    <div class="card-header" id="heading<%= conversation.id %>">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<%= conversation.id %>" aria-expanded="true" aria-controls="collapse<%= conversation.id %>">
-          <%= conversation.opposed_user(user).email %>
-        </button>
-      </h5>
-    </div>
+<li>
+  <div id="accordion">
+    <div class="card">
+      <div class="card-header" id="heading<%= conversation.id %>">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<%= conversation.id %>" aria-expanded="true" aria-controls="collapse<%= conversation.id %>">
+            <%= conversation.opposed_user(user).email %>
+          </button>
+        </h5>
+      </div>
 
-    <div id="collapse<%= conversation.id %>" class="collapse show" aria-labelledby="heading<%= conversation.id %>" data-parent="#accordion">
-      <div class="card-body">
-        <%= render 'conversations/conversation_content', messages: conversation.messages, user: user %>
+      <div id="collapse<%= conversation.id %>" class="collapse show" aria-labelledby="heading<%= conversation.id %>" data-parent="#accordion">
+        <div class="card-body">
+          <div class="messages-list">
+            <ul>
+              <%= render 'conversations/conversation_content', messages: conversation.messages, user: user %>
+            </ul> 
+          </div>
+          <%= form_for [conversation, conversation.messages.new], remote: true do |f| %>
+            <%= f.hidden_field :user_id, value: user.id %>
+            <%= f.text_area :body, class: "form-control" %>
+            <%= f.submit "Send", class: "btn btn-success" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</li>
